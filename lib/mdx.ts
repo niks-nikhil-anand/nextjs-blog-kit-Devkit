@@ -6,6 +6,18 @@ import readingTime from "reading-time";
 const POSTS_PATH = path.join(process.cwd(), "content/posts");
 const AUTHORS_PATH = path.join(process.cwd(), "content/authors");
 
+function slugify(text: string) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")     // Replace spaces with -
+    .replace(/[^\w-]+/g, "")    // Remove all non-word chars
+    .replace(/--+/g, "-")       // Replace multiple - with single -
+    .replace(/^-+/, "")         // Trim - from start of text
+    .replace(/-+$/, "");        // Trim - from end of text
+}
+
 export interface Author {
   name: string;
   slug: string;
@@ -27,6 +39,7 @@ export interface Post {
   author: string;
   coverImage: string;
   draft: boolean;
+  featured: boolean;
   content: string;
   readingTime: string;
 }
@@ -41,8 +54,16 @@ export function getAllPosts(): Post[] {
       const { data, content } = matter(source);
       
       return {
+        title: "",
+        description: "",
+        date: new Date().toISOString(),
+        featured: false,
+        tags: [],
+        author: "devkit",
+        draft: false,
+        coverImage: "",
         ...data,
-        slug: file.replace(".mdx", ""),
+        slug: slugify(file.replace(".mdx", "")),
         content,
         readingTime: readingTime(content).text,
       } as Post;
@@ -53,13 +74,22 @@ export function getAllPosts(): Post[] {
 
 export function getPostBySlug(slug: string): Post | null {
   try {
-    const fullPath = path.join(POSTS_PATH, `${slug}.mdx`);
+    const cleanSlug = slugify(slug);
+    const fullPath = path.join(POSTS_PATH, `${cleanSlug}.mdx`);
     const source = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(source);
     
     return {
+      title: "",
+      description: "",
+      date: new Date().toISOString(),
+      featured: false,
+      tags: [],
+      author: "devkit",
+      draft: false,
+      coverImage: "",
       ...data,
-      slug,
+      slug: cleanSlug,
       content,
       readingTime: readingTime(content).text,
     } as Post;
@@ -96,6 +126,10 @@ export function getAdjacentPosts(currentSlug: string): { prev: Post | null; next
   const allPosts = getAllPosts();
   const currentIndex = allPosts.findIndex((post) => post.slug === currentSlug);
   
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
   return {
     prev: currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
     next: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
