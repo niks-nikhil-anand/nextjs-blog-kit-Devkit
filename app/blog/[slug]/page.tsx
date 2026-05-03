@@ -30,6 +30,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ShareButtons } from "@/components/blog/ShareButtons";
 import { PostCard } from "@/components/blog/PostCard";
+import { ReadingProgress } from "@/components/blog/ReadingProgress";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -49,7 +50,7 @@ export async function generateStaticParams() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Dynamic metadata + JSON-LD                                         */
+/*  Dynamic metadata                                                   */
 /* ------------------------------------------------------------------ */
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://devkitblog.com";
@@ -90,7 +91,7 @@ export async function generateMetadata({
 }
 
 /* ------------------------------------------------------------------ */
-/*  Rehype options (extracted for readability)                          */
+/*  Rehype options                                                     */
 /* ------------------------------------------------------------------ */
 
 const rehypeOptions = {
@@ -153,27 +154,24 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      {/* JSON-LD — rendered inline, no next/script needed for static */}
+      {/* JSON-LD — safe in RSC, rendered in <head> by Next.js */}
       <script
         type="application/ld+json"
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* ── Reading-progress bar ── */}
-      <div className="reading-progress fixed inset-x-0 top-0 z-50 h-[3px]">
-        <div
-          id="progress"
-          className="h-full w-0 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500 transition-none"
-        />
-      </div>
+      {/* Reading progress bar — client component with useEffect */}
+      <ReadingProgress />
 
       <article className="relative">
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/*  HERO SECTION                                              */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <header className="relative overflow-hidden  bg-white pb-16 pt-10 dark:border-zinc-800 dark:bg-zinc-950 lg:pb-24 lg:pt-16">
+        <header className="relative overflow-hidden bg-white pb-16 pt-10 dark:border-zinc-800 dark:bg-zinc-950 lg:pb-24 lg:pt-16">
           {/* Subtle grain overlay */}
-          <div className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
             }}
@@ -271,7 +269,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </header>
 
-        {/* ── Cover Image (breaks out of container for drama) ── */}
+        {/* ── Cover Image ── */}
         <div className="container mx-auto max-w-5xl px-6">
           <div className="relative -mt-1 mb-16 aspect-[2/1] w-full overflow-hidden rounded-2xl border border-zinc-200 shadow-xl dark:border-zinc-800 lg:rounded-3xl">
             {post.coverImage ? (
@@ -302,22 +300,15 @@ export default async function BlogPostPage({ params }: PageProps) {
                 className={[
                   "prose prose-zinc dark:prose-invert",
                   "prose-lg max-w-none",
-                  /* Headings */
                   "prose-headings:scroll-mt-24 prose-headings:font-extrabold prose-headings:tracking-tight",
                   "prose-h2:mt-16 prose-h2:border-b prose-h2:border-zinc-200 prose-h2:pb-4 prose-h2:text-3xl dark:prose-h2:border-zinc-800",
                   "prose-h3:mt-10 prose-h3:text-xl",
-                  /* Links */
                   "prose-a:font-semibold prose-a:text-emerald-600 prose-a:underline prose-a:decoration-emerald-300 prose-a:underline-offset-2 prose-a:transition-colors hover:prose-a:text-emerald-700 hover:prose-a:decoration-emerald-500 dark:prose-a:text-emerald-400 dark:prose-a:decoration-emerald-700 dark:hover:prose-a:text-emerald-300",
-                  /* Code */
                   "prose-pre:rounded-xl prose-pre:border prose-pre:border-zinc-200 prose-pre:bg-zinc-50 prose-pre:shadow-sm dark:prose-pre:border-zinc-800 dark:prose-pre:bg-zinc-900",
                   "prose-code:rounded prose-code:bg-zinc-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.875em] prose-code:font-medium prose-code:before:content-none prose-code:after:content-none dark:prose-code:bg-zinc-800",
-                  /* Images */
                   "prose-img:rounded-xl prose-img:border prose-img:shadow-md",
-                  /* Blockquote */
                   "prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-emerald-50/50 prose-blockquote:py-1 prose-blockquote:pl-6 prose-blockquote:not-italic dark:prose-blockquote:bg-emerald-950/20",
-                  /* Lists */
                   "prose-li:marker:text-emerald-500",
-                  /* HR */
                   "prose-hr:border-zinc-200 dark:prose-hr:border-zinc-800",
                 ].join(" ")}
               >
@@ -445,7 +436,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               </nav>
             </div>
 
-            {/* ── Sidebar: Table of Contents ── */}
+            {/* ── Sidebar ── */}
             <aside className="hidden lg:block">
               <div className="sticky top-24 space-y-6">
                 <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-5 dark:border-zinc-800 dark:bg-zinc-900/50">
@@ -496,23 +487,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           </section>
         )}
       </article>
-
-      {/* ── Reading progress bar script ── */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function() {
-              var bar = document.getElementById('progress');
-              if (!bar) return;
-              window.addEventListener('scroll', function() {
-                var h = document.documentElement;
-                var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-                bar.style.width = Math.min(pct, 100) + '%';
-              }, { passive: true });
-            })();
-          `,
-        }}
-      />
     </>
   );
 }
