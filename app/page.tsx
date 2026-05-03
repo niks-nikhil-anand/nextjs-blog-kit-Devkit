@@ -1,5 +1,5 @@
-import { Hero } from "@/components/section /shared/Hero";
-import { BlogSection } from "@/components/section /shared/BlogSection";
+import { Hero } from "@/components/sections/shared/Hero";
+import { BlogSection } from "@/components/sections/shared/BlogSection";
 
 export default function Home() {
   return (
