@@ -38,10 +38,14 @@ export function LatestPosts({ posts }: { posts: Post[] }) {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:gap-x-10 lg:gap-y-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 lg:gap-x-12 lg:gap-y-20">
         {latestPosts.map((post, idx) => (
-          <article key={post.slug} className="group cursor-pointer flex flex-col gap-5 lg:gap-6">
-            <div className="relative aspect-[4/3] rounded-[20px] overflow-hidden transition-transform duration-500 ease-out group-hover:-translate-y-1.5">
+          <Link 
+            key={post.slug} 
+            href={`/blog/${post.slug}`}
+            className="group flex flex-col gap-6"
+          >
+            <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden bg-bg-2 shadow-sm transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-xl group-hover:shadow-ink/5">
               {post.coverImage ? (
                 <Image
                   src={post.coverImage}
@@ -53,33 +57,43 @@ export function LatestPosts({ posts }: { posts: Post[] }) {
                 <div className={cn("absolute inset-0", patterns[idx % patterns.length])} />
               )}
               
-              <div className="absolute top-4 left-4 bg-background px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.16em] text-ink">
+              <div className="absolute top-5 left-5 bg-background/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.16em] text-ink z-10">
                 {post.tags[0] || "Travel"}
               </div>
               
-              <button className="absolute top-4 right-4 w-9 h-9 bg-background rounded-full flex items-center justify-center text-ink hover:bg-accent hover:text-background transition-colors shadow-sm">
-                <Bookmark className="w-4 h-4" />
-              </button>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
             </div>
 
-            <div className="flex flex-col gap-3">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                {post.tags[0] || "Travel"}
-              </span>
-              <Link href={`/blog/${post.slug}`}>
-                <h3 className="font-serif text-[26px] lg:text-[28px] leading-tight tracking-tight font-medium text-ink group-hover:text-accent transition-colors">
-                  {post.title}
-                </h3>
-              </Link>
-              <p className="text-[14px] lg:text-[15px] leading-relaxed text-ink-2 line-clamp-2">
+            <div className="flex flex-col gap-4 px-1">
+              <div className="flex items-center gap-3">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                  {post.tags[0] || "Travel"}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-rule-strong" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
+                  {format(new Date(post.date), "MMM d, yyyy")}
+                </span>
+              </div>
+              
+              <h3 className="font-serif text-[28px] lg:text-[32px] leading-[1.15] tracking-tight font-medium text-ink group-hover:text-accent transition-colors duration-300">
+                {post.title}
+              </h3>
+              
+              <p className="text-[15px] lg:text-[16px] leading-relaxed text-ink-2 line-clamp-3 opacity-80 group-hover:opacity-100 transition-opacity">
                 {post.description}
               </p>
-              <div className="flex items-center justify-between pt-2 border-t border-rule/60 text-[12px] text-muted">
-                <span className="font-semibold text-ink-2">{format(new Date(post.date), "MMM d, yyyy")}</span>
-                <span>{post.readingTime}</span>
+              
+              <div className="flex items-center justify-between pt-5 border-t border-rule text-[12px] text-muted mt-2 font-medium">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent/20" />
+                  <span>{post.readingTime} read</span>
+                </div>
+                <span className="group-hover:text-accent transition-colors flex items-center gap-1 font-bold uppercase tracking-widest text-[10px]">
+                  Read Story <span>→</span>
+                </span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>
