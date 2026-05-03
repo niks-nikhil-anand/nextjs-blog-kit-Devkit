@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -124,6 +124,11 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post || post.draft) notFound();
+
+  // If the slug in the URL is not the "clean" slug, redirect to the clean one
+  if (slug !== post.slug) {
+    redirect(`/blog/${post.slug}`);
+  }
 
   const author = getAuthorBySlug(post.author);
   const relatedPosts = getRelatedPosts(post);

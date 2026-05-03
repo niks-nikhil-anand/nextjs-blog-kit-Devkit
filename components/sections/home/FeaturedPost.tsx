@@ -42,6 +42,7 @@ export function FeaturedPost({ posts }: FeaturedPostProps) {
                 src={hero.coverImage}
                 alt={hero.title}
                 fill
+                sizes="(max-width: 1024px) 100vw, 800px"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             ) : (
@@ -89,6 +90,7 @@ export function FeaturedPost({ posts }: FeaturedPostProps) {
                     src={post.coverImage}
                     alt={post.title}
                     fill
+                    sizes="140px"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 ) : (
