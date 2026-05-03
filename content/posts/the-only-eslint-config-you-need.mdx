@@ -1,0 +1,108 @@
+---
+title: "The Only ESLint Config You'll Ever Need"
+description: "A battle-tested ESLint + Prettier setup for Next.js and TypeScript projects. Copy, paste, and never think about linting again."
+date: "2026-04-22"
+tags: ["devops", "typescript", "developer-tools"]
+author: "devkit"
+coverImage: "/images/posts/eslint-config.jpg"
+draft: false
+---
+
+We've all been there: starting a new project and spending the first two hours fighting with ESLint configurations. You install one plugin, it breaks another, and suddenly you have 400 warnings in a blank file.
+
+It's time for a better way. This is the battle-tested configuration we use at DevKit for all our production Next.js projects.
+
+## The Problem with Modern Linting
+
+Most "starter" configs are either too loose (letting through obvious bugs) or too strict (blocking you from shipping code because of an unused variable in a draft).
+
+The goal of linting should be:
+1. Prevent runtime errors.
+2. Ensure basic code consistency.
+3. Stay out of the way during active development.
+
+## The Core Stack
+
+We're going to use the new **ESLint Flat Config** system, which is standard in ESLint v9+. We'll combine it with Prettier for formatting and specific plugins for Next.js and Tailwind CSS.
+
+### 1. Installation
+
+```bash
+npm install -D eslint prettier eslint-config-next eslint-plugin-tailwindcss eslint-config-prettier
+```
+
+### 2. The Configuration File
+
+Create an `eslint.config.mjs` file in your root directory. This config handles TypeScript, React hooks, Next.js specifics, and Tailwind class sorting.
+
+```javascript title="eslint.config.mjs"
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      "no-unused-vars": "warn",
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "@typescript-eslint/no-explicit-any": "error",
+      "react/no-unescaped-entities": "off",
+    },
+  },
+];
+
+export default eslintConfig;
+```
+
+<Callout type="warning">
+  Notice the `@typescript-eslint/no-explicit-any: "error"` rule. This is the single most important rule for keeping a TypeScript codebase healthy. Avoid the temptation to turn it off!
+</Callout>
+
+## Integrating Prettier
+
+Prettier should handle *how it looks*, while ESLint handles *what it does*. To prevent them from fighting, we use `eslint-config-prettier`.
+
+```json title=".prettierrc"
+{
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "plugins": ["prettier-plugin-tailwindcss"]
+}
+```
+
+## Automating with Husky & Lint-Staged
+
+A linting config is useless if people don't run it. We use `husky` and `lint-staged` to run the linter automatically on every commit.
+
+```json title="package.json"
+{
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix",
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+  }
+}
+```
+
+## Common Gotchas
+
+### 1. React is not defined
+In modern React (v17+), you don't need to import `React` in every file. If your linter is complaining, ensure you're using the latest `eslint-plugin-react` settings.
+
+### 2. Tailwind Class Sorting
+Using `prettier-plugin-tailwindcss` is a game-changer. It automatically sorts your Tailwind classes in a consistent order, which makes diffs much cleaner.
+
+## Conclusion
+
+Consistency is the key to scaling a team. By having a "standard" config that you copy into every project, you reduce friction and focus on what matters: shipping features.
+
+As I discussed in [Building a Custom MDX Pipeline](/blog/building-custom-mdx-pipeline-nextjs), good tooling is the foundation of a great developer experience. Set it up once, and never think about it again.

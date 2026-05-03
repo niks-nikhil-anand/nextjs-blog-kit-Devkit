@@ -1,114 +1,81 @@
 import React from "react";
 import Link from "next/link";
-import { Rocket, Mail, Globe, MessageSquare, Briefcase } from "lucide-react";
+import { Mail, MessageSquare } from "lucide-react";
+import { TwitterIcon, GithubIcon, LinkedinIcon } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
-
-const GithubIcon = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-  </svg>
-);
-
-const TwitterIcon = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-  </svg>
-);
-
-const LinkedinIcon = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-  </svg>
-);
 
 const footerLinks = [
   {
-    title: "Product",
+    title: "Links",
     links: [
-      { name: "Features", href: "#" },
-      { name: "Pricing", href: "#" },
-      { name: "Documentation", href: "#" },
-      { name: "Guides", href: "#" },
+      { name: "Home", href: "/" },
+      { name: "Blog", href: "/blog" },
+      { name: "Tags", href: "/tags" },
+      { name: "About", href: "/about" },
     ],
   },
   {
-    title: "Company",
+    title: "Resources",
     links: [
-      { name: "About", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "Careers", href: "#" },
-      { name: "Contact", href: "#" },
+      { name: "Documentation", href: "/docs" },
+      { name: "RSS Feed", href: "/feed.xml" },
+      { name: "GitHub Repo", href: "https://github.com/devkit-market/devkit-blog-starter" },
     ],
   },
   {
-    title: "Legal",
+    title: "Support",
     links: [
-      { name: "Privacy", href: "#" },
-      { name: "Terms", href: "#" },
-      { name: "Cookie Policy", href: "#" },
+      { name: "Contact", href: "mailto:hello@devkitmarket.com" },
+      { name: "DevKit Market", href: "https://www.devkitmarket.com" },
     ],
   },
 ];
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-border bg-background/50 py-12 md:py-16 lg:py-20 mt-auto">
+    <footer className="w-full border-t border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/20 py-12 md:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:scale-110">
-                <Rocket className="h-5 w-5" />
-              </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">
-                DevKit<span className="text-primary">Blog</span>
+            <Link href="/" className="flex items-center gap-2 mb-6 group">
+              <span className="text-2xl font-bold tracking-tight text-foreground">
+                DevKit<span className="text-primary italic">Blog</span>
               </span>
             </Link>
-            <p className="text-muted-foreground text-sm max-w-xs mb-6">
-              Empowering developers with premium starters, boilerplates, and expert guides for building modern web applications.
+            <p className="text-zinc-500 text-sm max-w-xs mb-8 dark:text-zinc-400">
+              A premium Next.js blog starter kit for developers who want to ship fast. 
+              Built with MDX, Tailwind CSS, and shadcn/ui.
             </p>
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon-sm" className="rounded-full">
-                <TwitterIcon className="h-4 w-4" />
+              <Button variant="outline" size="icon" className="rounded-full size-10 border-zinc-200 dark:border-zinc-800" asChild>
+                <a href="https://twitter.com/devkitmarket" target="_blank" rel="noreferrer">
+                  <TwitterIcon className="size-4" />
+                </a>
               </Button>
-              <Button variant="ghost" size="icon-sm" className="rounded-full">
-                <GithubIcon className="h-4 w-4" />
+              <Button variant="outline" size="icon" className="rounded-full size-10 border-zinc-200 dark:border-zinc-800" asChild>
+                <a href="https://github.com/devkit-market" target="_blank" rel="noreferrer">
+                  <GithubIcon className="size-4" />
+                </a>
               </Button>
-              <Button variant="ghost" size="icon-sm" className="rounded-full">
-                <LinkedinIcon className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon-sm" className="rounded-full">
-                <Mail className="h-4 w-4" />
+              <Button variant="outline" size="icon" className="rounded-full size-10 border-zinc-200 dark:border-zinc-800" asChild>
+                <a href="mailto:hello@devkitmarket.com">
+                  <Mail className="size-4" />
+                </a>
               </Button>
             </div>
           </div>
 
           {footerLinks.map((column) => (
-            <div key={column.title} className="flex flex-col gap-4">
-              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+            <div key={column.title} className="flex flex-col gap-6">
+              <h3 className="text-xs font-bold text-foreground uppercase tracking-[0.2em]">
                 {column.title}
               </h3>
-              <ul className="flex flex-col gap-2">
+              <ul className="flex flex-col gap-4">
                 {column.links.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                      className="text-sm text-zinc-500 transition-colors hover:text-primary dark:text-zinc-400"
                     >
                       {link.name}
                     </Link>
@@ -119,16 +86,16 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} DevKit Blog. All rights reserved.
+        <div className="mt-20 pt-8 border-t border-zinc-100 dark:border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            © {new Date().getFullYear()} DevKit Blog Starter. Built with Next.js & MDX.
           </p>
-          <div className="flex items-center gap-6">
-            <Link href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+          <div className="flex items-center gap-8">
+            <Link href="/privacy" className="text-xs text-zinc-500 hover:text-primary transition-colors dark:text-zinc-400">
               Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-xs text-zinc-500 hover:text-primary transition-colors dark:text-zinc-400">
+              Terms of Service
             </Link>
           </div>
         </div>

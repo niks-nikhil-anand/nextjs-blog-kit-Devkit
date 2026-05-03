@@ -1,0 +1,11 @@
+{
+  "name": "DevKit",
+  "slug": "devkit",
+  "avatar": "/images/authors/devkit.jpg",
+  "bio": "Building production-ready starter kits for developers who ship fast. Creator of DevKit Market.",
+  "social": {
+    "twitter": "https://twitter.com/devkitmarket",
+    "github": "https://github.com/devkit-market",
+    "website": "https://www.devkitmarket.com"
+  }
+}

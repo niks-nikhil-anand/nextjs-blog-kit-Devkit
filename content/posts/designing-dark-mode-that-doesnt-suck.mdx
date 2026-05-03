@@ -1,0 +1,80 @@
+---
+title: "Designing Dark Mode That Doesn't Suck"
+description: "Most dark modes are just inverted colors. Here's how to build one that actually looks good, respects system preferences, and doesn't flash on load."
+date: "2026-04-19"
+tags: ["css", "design", "tailwind"]
+author: "devkit"
+coverImage: "/images/posts/dark-mode.jpg"
+draft: false
+---
+
+Adding a dark mode toggle to your site is easy. Designing a dark mode that users actually enjoy using is much harder. Most developers simply swap white for black and call it a day, but that often results in high-contrast "glare" that causes eye strain.
+
+Let's dive into how to build a premium dark mode experience.
+
+## The Problem with Pure Black
+
+In a dark room, the contrast between pure white text (#FFFFFF) and a pure black background (#000000) is physically painful. It causes "halation"—a glowing effect that makes text harder to read.
+
+### The Solution: Use Off-Blacks and Grays
+Instead of `#000000`, use deep neutrals or tinted grays. In **DevKit Blog Starter**, we use `zinc-950` as our base. It feels "darker" than pure black but is much softer on the eyes.
+
+<Callout type="tip">
+  Try tinting your dark mode grays with a hint of your primary color. For example, if your brand color is blue, use a very dark navy instead of a neutral gray.
+</Callout>
+
+## Handling Elevation and Depth
+
+In light mode, we use shadows to show that one element is "above" another. In dark mode, shadows are nearly invisible.
+
+### Use Lightness to Show Depth
+Instead of shadows, use lighter shades of gray to indicate elevation. The "closer" an object is to the user, the lighter its background should be.
+
+- **Background:** `zinc-950`
+- **Cards/Modals:** `zinc-900`
+- **Buttons/Inputs:** `zinc-800`
+
+## Preventing the "White Flash"
+
+Have you ever refreshed a dark mode site and seen a blinding white flash for a split second? This happens because the browser renders the default HTML (usually light) before the JavaScript can read your theme preference from localStorage.
+
+### The Next-Themes Solution
+If you're using Next.js, the easiest way to solve this is `next-themes`. It injects a small script into the `<head>` that runs before the page renders, applying the correct class instantly.
+
+```tsx title="app/layout.tsx"
+import { ThemeProvider } from 'next-themes'
+
+export default function RootLayout({ children }) {
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+## Implementation with Tailwind
+
+Tailwind 3.4+ and Tailwind 4 make dark mode incredibly simple. You just prefix your classes with `dark:`.
+
+```tsx
+<div className="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+  This adapts to your theme.
+</div>
+```
+
+## Respecting System Preferences
+
+Users expect your site to follow their OS settings. By setting `defaultTheme="system"` in `next-themes`, you ensure that the site starts in the mode the user already prefers. If they change it manually, we save that preference in a cookie or localStorage.
+
+## Conclusion
+
+A great dark mode isn't just about utility—it's about mood. By focusing on elevation, soft grays, and preventing layout shifts, you create an interface that feels native to the user's device.
+
+As I mentioned in [Why Boilerplates Save You Time](/blog/why-boilerplates-save-you-time), having these design tokens pre-configured is one of the biggest advantages of using a professional starter kit.
+
+Keep your eyes healthy and your designs dark!

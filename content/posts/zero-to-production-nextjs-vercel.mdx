@@ -1,0 +1,81 @@
+---
+title: "From Zero to Production: Deploying Next.js on Vercel"
+description: "A complete deployment guide — environment variables, custom domains, preview branches, analytics, and monitoring. Everything you need to go live."
+date: "2026-04-16"
+tags: ["next.js", "tutorial", "devops"]
+author: "devkit"
+coverImage: "/images/posts/vercel-deploy.jpg"
+draft: false
+---
+
+You've built your app, fixed the bugs, and it's looking great on `localhost:3000`. But "it works on my machine" is a long way from "it works for my users." Deploying a modern Next.js app requires more than just pushing code.
+
+In this guide, we'll walk through the complete process of taking a Next.js app to production on Vercel.
+
+## Step 1: Pre-Deployment Audit
+
+Before you even touch a deployment platform, you need to ensure your code is ready.
+
+1. **Run a Production Build:** Locally run `npm run build`. This will catch type errors, missing environment variables, or dynamic route issues that `npm run dev` might ignore.
+2. **Environment Variables:** Create a `.env.example` file that lists all the keys your app needs. Never commit your `.env.local` file with real secrets!
+3. **SEO Check:** Ensure your `Metadata` is correctly configured in your layouts and pages.
+
+<Callout type="warning">
+  Check your `package.json` scripts. Ensure your `build` script is standard (`next build`). Vercel looks for this by default.
+</Callout>
+
+## Step 2: Connecting to Vercel
+
+The beauty of Vercel is the GitHub integration.
+
+1. Go to [Vercel](https://vercel.com) and click **"Add New Project"**.
+2. Connect your GitHub repository.
+3. Vercel will automatically detect that it's a Next.js project.
+
+## Step 3: Configuring Environment Variables
+
+In the Vercel dashboard, you'll see an "Environment Variables" section. This is where you paste your production database URLs, API keys, and secrets.
+
+- **Development:** Variables for your local machine.
+- **Preview:** Variables for branch deployments.
+- **Production:** Variables for the live site.
+
+## Step 4: Preview Branches & PRs
+
+One of Vercel's best features is **Preview Deployments**. Every time you open a Pull Request, Vercel creates a unique URL for that specific branch. This allows you to test new features in a production-like environment before merging them into `main`.
+
+## Step 5: Custom Domains & SSL
+
+Once your app is deployed to a `.vercel.app` subdomain, it's time to add your real brand.
+
+1. Go to **Settings > Domains**.
+2. Enter your domain (e.g., `devkitblog.com`).
+3. Follow the DNS instructions to point your A/CNAME records to Vercel.
+4. Vercel will automatically generate and renew an SSL certificate for you.
+
+## Step 6: Analytics & Monitoring
+
+A production app isn't finished until you can measure it.
+
+- **Vercel Analytics:** One-click integration to see page views and visitor data without slowing down your site.
+- **Vercel Speed Insights:** Real-world Core Web Vitals data from your actual users.
+- **Error Tracking:** Consider adding Sentry or Axiom to catch runtime errors that don't show up in your logs.
+
+## Step 7: The Production Checklist
+
+<Callout type="tip">
+  **The Launch Checklist:**
+  - [ ] Canonical URLs configured.
+  - [ ] Favicons and social share images uploaded.
+  - [ ] API rate limits checked.
+  - [ ] Database backups scheduled.
+  - [ ] Sitemap and RSS feed validated.
+</Callout>
+
+## Conclusion
+
+Deploying is just the beginning of the journey. By following a structured process—from local builds to preview branches—you reduce the risk of downtime and ensure a smooth experience for your users.
+
+As I covered in [Why Boilerplates Save You Time](/blog/why-boilerplates-save-you-time), using a starter kit that already has these deployment scripts and configurations set up can save you hours of troubleshooting.
+
+Go live, and start shipping!
