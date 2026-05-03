@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/sections/shared/Navbar";
 import { Footer } from "@/components/sections/shared/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Ticker } from "@/components/sections/home/Ticker";
 
-const bricolage = Bricolage_Grotesque({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-heading",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  title: "DevKit Blog Starter — Production-Ready Next.js MDX Blog",
-  description: "A high-performance, SEO-optimized blog starter kit built with Next.js 14, Tailwind CSS, and MDX.",
+  title: "Stories — Travel, Hotels & Lifestyle, by Elena Marsh",
+  description: "A slow travel journal kept by a writer with bad maps and good shoes.",
 };
 
 export default function RootLayout({
@@ -29,7 +32,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${plusJakarta.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-screen flex flex-col font-sans" suppressHydrationWarning>
          <ThemeProvider
@@ -38,6 +41,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Ticker />
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />

@@ -1,25 +1,23 @@
-import { getAllPosts, getAuthorBySlug } from "@/lib/mdx";
+import { getAllPosts } from "@/lib/mdx";
 import { HeroSection } from "@/components/sections/home/HeroSection";
 import { FeaturedPost } from "@/components/sections/home/FeaturedPost";
 import { LatestPosts } from "@/components/sections/home/LatestPosts";
-import { TagsSection } from "@/components/sections/home/TagsSection";
+import { CategoriesSection } from "@/components/sections/home/CategoriesSection";
 import { Newsletter } from "@/components/sections/home/Newsletter";
 
 export default function Home() {
   const allPosts = getAllPosts();
   
-  // Use "Why I Switched from WordPress to MDX" as the featured post if it exists
-  const featuredPost = allPosts.find(p => p.slug === "why-i-switched-from-wordpress-to-mdx") || allPosts[0];
-  const latestPosts = allPosts.filter(p => p.slug !== featuredPost?.slug).slice(0, 6);
+  const featuredPosts = allPosts.slice(0, 6); // We need 6 for the featured section (1 + 5)
+  const latestPosts = allPosts.filter(p => !featuredPosts.some(fp => fp.slug === p.slug)).slice(0, 6);
   
-  const author = featuredPost ? getAuthorBySlug(featuredPost.author) : null;
-
   return (
-    <div className="flex flex-col gap-0">
+    <div className="flex flex-col gap-0 bg-background">
+      
       <HeroSection />
-      {featuredPost && <FeaturedPost post={featuredPost} author={author} />}
+      {featuredPosts.length > 0 && <FeaturedPost posts={featuredPosts} />}
       <LatestPosts posts={latestPosts} />
-      <TagsSection />
+      <CategoriesSection />
       <Newsletter />
     </div>
   );

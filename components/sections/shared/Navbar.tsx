@@ -2,106 +2,97 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu, X, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "./ThemeToggle";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const navLinks = [
+const leftLinks = [
   { name: "Home", href: "/" },
-  { name: "Blog", href: "/blog" },
-  { name: "Tags", href: "/tags" },
-  { name: "About", href: "/about" },
+  { name: "Travel", href: "/blog?category=travel" },
+  { name: "Destination", href: "/blog?category=destination" },
+  { name: "Hotels", href: "/blog?category=hotels" },
+  { name: "Lifestyle", href: "/blog?category=lifestyle" },
+];
+
+const rightLinks = [
+  { name: "Galleries", href: "/galleries" },
+  { name: "Shop", href: "/shop" },
 ];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
+    <nav
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "sticky top-0 z-50 w-full transition-all duration-300 border-b",
         isScrolled
-          ? "border-b border-border/40 bg-background/80 backdrop-blur-md"
-          : "bg-transparent"
+          ? "border-rule bg-background/90 backdrop-blur-md py-3"
+          : "border-transparent bg-background py-5"
       )}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-xl font-bold tracking-tight text-foreground">
-              DevKit<span className="text-primary italic">Blog</span>
-            </span>
-          </Link>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-4">
-          <ThemeToggle />
-          <Button size="sm" className="rounded-full px-5 font-bold" asChild>
-            <Link href="https://github.com/devkit-market/devkit-blog-starter" target="_blank">
-              GitHub
-            </Link>
-          </Button>
-        </div>
-
-        {/* Mobile Toggle */}
-        <div className="flex md:hidden items-center gap-4">
-          <ThemeToggle />
-          <button
-            className="flex items-center justify-center p-2 text-foreground"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-b border-border bg-background animate-in fade-in slide-in-from-top-4 duration-200">
-          <div className="space-y-1 px-4 pb-6 pt-2">
-            {navLinks.map((link) => (
+      <div className="container mx-auto max-w-[1320px] px-6 lg:px-9">
+        <div className="grid grid-cols-3 items-center gap-10">
+          {/* Left Links */}
+          <div className="hidden lg:flex items-center gap-7">
+            {leftLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="block py-3 text-base font-medium text-muted-foreground hover:text-foreground"
-                onClick={() => setMobileMenuOpen(false)}
+                className="text-[13px] font-medium text-ink-2 hover:text-accent transition-colors relative group"
               >
                 {link.name}
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
             ))}
-            <div className="pt-4 flex flex-col gap-3">
-              <Button className="w-full justify-center rounded-full font-bold">GitHub</Button>
+          </div>
+
+          {/* Centered Brand */}
+          <Link href="/" className="flex flex-col items-center group">
+            <span className="font-serif text-[34px] italic leading-tight tracking-tight group-hover:text-accent transition-colors">
+              Stories
+            </span>
+            <span className="font-sans text-[9px] uppercase tracking-[0.4em] text-muted -mt-1">
+              By Elena Marsh
+            </span>
+          </Link>
+
+          {/* Right Links & CTA */}
+          <div className="flex items-center justify-end gap-7">
+            <div className="hidden lg:flex items-center gap-7">
+              {rightLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-[13px] font-medium text-ink-2 hover:text-accent transition-colors relative group"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              ))}
             </div>
+            
+            <button className="w-9 h-9 border border-rule-strong rounded-full flex items-center justify-center text-ink-2 hover:bg-ink hover:text-background hover:border-ink transition-all duration-200">
+              <Search className="w-3.5 h-3.5" />
+            </button>
+
+            <Link
+              href="/subscribe"
+              className="hidden sm:inline-flex items-center gap-2 bg-ink text-background px-4 py-2.5 rounded-full text-[12px] font-semibold tracking-wider hover:bg-accent transition-colors"
+            >
+              Subscribe →
+            </Link>
           </div>
         </div>
-      )}
-    </header>
+      </div>
+    </nav>
   );
 }
