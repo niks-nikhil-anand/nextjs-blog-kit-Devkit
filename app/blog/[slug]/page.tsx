@@ -68,7 +68,7 @@ export async function generateMetadata({
     : `${SITE_URL}${post.coverImage}`;
 
   return {
-    title: `${post.title} — DevKit Blog`,
+    title: post.title,
     description: post.description,
     openGraph: {
       title: post.title,

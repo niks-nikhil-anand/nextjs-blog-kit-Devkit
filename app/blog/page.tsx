@@ -8,7 +8,7 @@ import { PostCard } from "@/components/blog/PostCard";
 import { BlogPagination } from "@/components/blog/BlogPagination";
 
 export const metadata: Metadata = {
-  title: "All Stories — by Elena Marsh",
+  title: "All Stories",
   description: "Every story, sorted, filtered, and waiting for a quiet afternoon.",
 };
 

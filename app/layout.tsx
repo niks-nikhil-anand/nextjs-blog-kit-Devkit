@@ -19,8 +19,24 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Stories — Travel, Hotels & Lifestyle, by Elena Marsh",
+  title: {
+    default: "Stories — Travel, Hotels & Lifestyle, by Elena Marsh",
+    template: "%s — Stories",
+  },
   description: "A slow travel journal kept by a writer with bad maps and good shoes.",
+  openGraph: {
+    title: "Stories — Travel, Hotels & Lifestyle, by Elena Marsh",
+    description: "A slow travel journal kept by a writer with bad maps and good shoes.",
+    url: "https://devkitblog.com",
+    siteName: "Stories",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stories — Travel, Hotels & Lifestyle, by Elena Marsh",
+    description: "A slow travel journal kept by a writer with bad maps and good shoes.",
+  },
 };
 
 export default function RootLayout({

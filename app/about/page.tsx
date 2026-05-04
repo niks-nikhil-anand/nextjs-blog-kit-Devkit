@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 import { PortraitIllustration } from "@/components/blog/PortraitIllustration";
 
 export const metadata: Metadata = {
-  title: "About Elena — Stories",
-  description: "Writer with bad maps and good shoes. Currently in Lisbon, next stop Marrakech.",
+  title: "About Elena",
+  description: "Writer with bad maps and good shoes. Currently in Lisbon, next stop Marrakech. Learn more about the author of Stories.",
 };
 
 export default function AboutPage() {
