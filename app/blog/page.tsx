@@ -5,15 +5,27 @@ import Image from "next/image";
 import { Search, Mail } from "lucide-react";
 import { getAllPosts, Post } from "@/lib/mdx";
 import { PostCard } from "@/components/blog/PostCard";
+import { BlogPagination } from "@/components/blog/BlogPagination";
 
 export const metadata: Metadata = {
   title: "All Stories — by Elena Marsh",
   description: "Every story, sorted, filtered, and waiting for a quiet afternoon.",
 };
 
-export default async function BlogListingPage() {
-  const posts = getAllPosts();
-  const latestPosts = posts.slice(0, 5); // Use latest as "most read" for now
+export default async function BlogListingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { page } = await searchParams;
+  const currentPage = Number(page) || 1;
+  const postsPerPage = 6;
+  
+  const allPosts = getAllPosts();
+  const totalPages = Math.ceil(allPosts.length / postsPerPage);
+  const posts = allPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+  
+  const latestPosts = allPosts.slice(0, 5); // Use latest as "most read" for now
   
   // Extract all unique tags
   const allTags = Array.from(new Set(posts.flatMap(post => post.tags)));
@@ -99,19 +111,11 @@ export default async function BlogListingPage() {
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center items-center gap-2 mt-16 pt-12 border-t border-rule">
-              <button className="px-4.5 py-3 rounded-full border border-rule-strong text-[12px] font-bold tracking-wider text-ink-2 hover:border-ink hover:text-ink transition-all">
-                ← Previous
-              </button>
-              <button className="w-10.5 h-10.5 rounded-full bg-ink border border-ink text-background font-serif text-[18px] transition-all">1</button>
-              <button className="w-10.5 h-10.5 rounded-full border border-rule-strong text-ink-2 font-serif text-[18px] hover:border-ink hover:text-ink transition-all">2</button>
-              <button className="w-10.5 h-10.5 rounded-full border border-rule-strong text-ink-2 font-serif text-[18px] hover:border-ink hover:text-ink transition-all">3</button>
-              <span className="px-1.5 text-muted">…</span>
-              <button className="w-10.5 h-10.5 rounded-full border border-rule-strong text-ink-2 font-serif text-[18px] hover:border-ink hover:text-ink transition-all">15</button>
-              <button className="px-4.5 py-3 rounded-full border border-rule-strong text-[12px] font-bold tracking-wider text-ink-2 hover:border-ink hover:text-ink transition-all">
-                Next →
-              </button>
-            </div>
+            <BlogPagination 
+              currentPage={currentPage} 
+              totalPages={totalPages} 
+              baseUrl="/blog" 
+            />
           </main>
 
           {/* Sidebar */}
