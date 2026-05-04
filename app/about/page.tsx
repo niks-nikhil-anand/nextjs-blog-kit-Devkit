@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
+import { PortraitIllustration } from "@/components/blog/PortraitIllustration";
+
 export const metadata: Metadata = {
   title: "About Elena — Stories",
   description: "Writer with bad maps and good shoes. Currently in Lisbon, next stop Marrakech.",
@@ -19,7 +21,7 @@ export default function AboutPage() {
           <p className="font-serif italic text-2xl text-accent mb-3">
             — Pleased to meet you
           </p>
-          <h1 className="font-serif text-[clamp(56px,8vw,120px)] leading-[0.95] tracking-tight font-medium mb-7 text-ink">
+          <h1 className="font-serif text-[56px] md:text-[80px] lg:text-[80px] leading-[0.98] tracking-tight font-medium mb-8 lg:mb-10 text-ink">
             I&apos;m Elena <em className="italic text-accent">Marsh</em>, and this is my notebook.
           </h1>
           <p className="text-lg lg:text-[18px] text-ink-2 max-w-[50ch] leading-relaxed mb-8">
@@ -59,26 +61,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="relative w-full aspect-[4/5] max-w-[440px] mx-auto lg:mx-0">
-          <div className="absolute top-3.5 left-3.5 z-20 bg-background border border-rule-strong px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.18em] font-bold text-ink shadow-sm">
-            PORTRAIT · LISBON, 2025
-          </div>
-          <div className="absolute inset-0 rounded-[50%_50%_50%_50%_/_60%_60%_40%_40%] overflow-hidden bg-gradient-to-br from-sand via-accent to-accent-deep shadow-2xl">
-            <div className="absolute top-[34%] left-1/2 -translate-x-1/2 w-[90px] h-[90px] rounded-full bg-gradient-to-b from-[#f5e3c4] via-[#e3c498] to-transparent z-10 shadow-lg opacity-90" />
-            <div className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[170px] h-[160px] bg-[#3b2818] rounded-[50%_50%_30%_30%_/_60%_60%_30%_30%]" />
-            <div className="absolute bottom-0 inset-x-0 h-[38%] bg-gradient-to-b from-transparent via-[#5a3a25] to-[#3b2818] z-10" />
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[65%] h-full bg-[#a86d3f] rounded-[50%_50%_0_0_/_80%_80%_0_0] z-[5]" />
-          </div>
-          <div className="absolute -top-[4%] -right-[4%] bg-background border border-dashed border-rule-strong p-3.5 rounded-full flex items-center gap-2 text-[11px] font-bold text-ink shadow-xl whitespace-nowrap z-30">
-            <span className="font-serif italic text-accent text-lg leading-none">e</span> 142 stories
-          </div>
-          <div className="absolute bottom-[18%] -left-[8%] bg-background border border-dashed border-rule-strong p-3.5 rounded-full flex items-center gap-2 text-[11px] font-bold text-ink shadow-xl whitespace-nowrap z-30">
-            <span className="font-serif italic text-accent text-lg leading-none">e</span> 38 countries
-          </div>
-          <div className="absolute -bottom-[2%] right-[6%] bg-ink p-3.5 rounded-full flex items-center gap-2 text-[11px] font-bold text-background shadow-xl whitespace-nowrap z-30">
-            <span className="font-serif text-sand text-lg leading-none">★</span> Editor&apos;s pick
-          </div>
-        </div>
+        <PortraitIllustration />
       </header>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
