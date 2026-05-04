@@ -8,14 +8,7 @@ import { Newsletter } from "@/components/sections/home/Newsletter";
 export default function Home() {
   const allPosts = getAllPosts();
   
-  // Sort posts to put featured ones first, then by date
-  const sortedForFeatured = [...allPosts].sort((a, b) => {
-    if (a.featured && !b.featured) return -1;
-    if (!a.featured && b.featured) return 1;
-    return 0; // Already sorted by date in getAllPosts
-  });
-
-  const featuredPosts = sortedForFeatured.slice(0, 6);
+  const featuredPosts = allPosts.filter(p => p.featured).slice(0, 6);
   const latestPosts = allPosts.filter(p => !featuredPosts.some(fp => fp.slug === p.slug)).slice(0, 6);
   
   return (
