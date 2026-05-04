@@ -176,7 +176,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <header className="relative overflow-hidden bg-white pb-16 pt-10 dark:border-zinc-800 dark:bg-zinc-950 lg:pb-24 lg:pt-16">
           {/* Subtle grain overlay */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+            className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05] "
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
             }}
@@ -275,7 +275,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </header>
 
         {/* ── Cover Image ── */}
-        <div className="container mx-auto max-w-5xl px-6">
+        <div className="container mx-auto max-w-5xl px-6 py-10">
           <div className="relative -mt-1 mb-16 aspect-[2/1] w-full overflow-hidden rounded-2xl border border-zinc-200 shadow-xl dark:border-zinc-800 lg:rounded-3xl">
             {post.coverImage ? (
               <Image
