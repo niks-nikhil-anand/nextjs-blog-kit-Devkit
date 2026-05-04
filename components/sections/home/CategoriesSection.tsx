@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -9,6 +10,7 @@ const categories = [
     slug: "travel", 
     count: 42, 
     className: "lg:col-span-2 lg:row-span-2 bg-[#b8754a]",
+    image: "/assets/categories/travel.png",
     bgPattern: "radial-gradient(ellipse_at_30%_40%,#f5d896_0_60px,transparent_90px),linear-gradient(180deg,#b8754a_0%,#6a3f24_100%)"
   },
   { 
@@ -16,6 +18,7 @@ const categories = [
     slug: "destination", 
     count: 28, 
     className: "lg:col-span-1 lg:row-span-1 bg-[#4a6580]",
+    image: "/assets/categories/destination.png",
     bgPattern: "linear-gradient(180deg,#4a6580_0%,#2a3548_100%)"
   },
   { 
@@ -23,6 +26,7 @@ const categories = [
     slug: "hotels", 
     count: 15, 
     className: "lg:col-span-1 lg:row-span-1 bg-[#d2c89e]",
+    image: "/assets/categories/hotels.png",
     bgPattern: "linear-gradient(180deg,#d2c89e_0%,#a89868_100%)"
   },
   { 
@@ -30,14 +34,15 @@ const categories = [
     slug: "lifestyle", 
     count: 22, 
     className: "lg:col-span-2 lg:row-span-1 bg-[#f3ede2] text-ink",
+    image: "/assets/categories/lifestyle.png",
     bgPattern: "radial-gradient(circle_at_40%_60%,#d99a6c_0_60px,transparent_80px),linear-gradient(180deg,#e8d4b0_0%,#c8a878_100%)"
   },
 ];
 
 const accentTiles = [
-  { name: "Ink", className: "bg-ink", colorName: "Ink" },
-  { name: "Orange", className: "bg-accent", colorName: "Terracotta" },
-  { name: "Olive", className: "bg-sage", colorName: "Olive" },
+  { name: "Ink", className: "bg-ink", colorName: "Ink", image: "/assets/categories/accent-ink.png" },
+  { name: "Orange", className: "bg-accent", colorName: "Terracotta", image: "/assets/categories/accent-terracotta.png" },
+  { name: "Olive", className: "bg-sage", colorName: "Olive", image: "/assets/categories/accent-olive.png" },
 ];
 
 export function CategoriesSection() {
@@ -63,12 +68,18 @@ export function CategoriesSection() {
         
         {/* Row 1 Right Accent Ink */}
         <div className="lg:col-span-1 lg:row-span-1 rounded-[24px] bg-ink p-8 flex flex-col justify-between text-background relative overflow-hidden group">
+          <Image
+            src={accentTiles[0].image!}
+            alt={accentTiles[0].name}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
           <div className="relative z-10">
-            <span className="font-serif italic text-sm text-sand opacity-60">Accent §01</span>
-            <h3 className="font-serif text-3xl mt-4 font-medium leading-tight">The Depth of <br /> Midnight Ink.</h3>
+            <span className="font-serif italic text-sm text-sand opacity-80">Accent §01</span>
+            <h3 className="font-serif text-3xl mt-4 font-medium leading-tight text-white">The Depth of <br /> Midnight Ink.</h3>
           </div>
-          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-sand/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
-          <span className="relative z-10 text-[10px] uppercase tracking-widest font-bold opacity-60">Color: Ink</span>
+          <span className="relative z-10 text-[10px] uppercase tracking-widest font-bold opacity-80 text-white">Color: Ink</span>
         </div>
 
         {/* Row 2 Right small */}
@@ -76,12 +87,18 @@ export function CategoriesSection() {
 
         {/* Row 2 Right Accent Orange */}
         <div className="lg:col-span-1 lg:row-span-1 rounded-[24px] bg-accent p-8 flex flex-col justify-between text-background relative overflow-hidden group">
-           <div className="relative z-10">
-            <span className="font-serif italic text-sm text-background opacity-60">Accent §02</span>
-            <h3 className="font-serif text-3xl mt-4 font-medium leading-tight">Warmth of <br /> Terracotta.</h3>
+          <Image
+            src={accentTiles[1].image!}
+            alt={accentTiles[1].name}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
+          <div className="relative z-10">
+            <span className="font-serif italic text-sm text-background opacity-80">Accent §02</span>
+            <h3 className="font-serif text-3xl mt-4 font-medium leading-tight text-white">Warmth of <br /> Terracotta.</h3>
           </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700" />
-          <span className="relative z-10 text-[10px] uppercase tracking-widest font-bold opacity-60">Color: Orange</span>
+          <span className="relative z-10 text-[10px] uppercase tracking-widest font-bold opacity-80 text-white">Color: Orange</span>
         </div>
 
         {/* Row 3 Lifestyle Wide */}
@@ -89,12 +106,18 @@ export function CategoriesSection() {
 
         {/* Row 3 Accent Olive */}
         <div className="lg:col-span-2 lg:row-span-1 rounded-[24px] bg-sage p-10 flex flex-col justify-between text-background relative overflow-hidden group">
+          <Image
+            src={accentTiles[2].image!}
+            alt={accentTiles[2].name}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
           <div className="relative z-10 max-w-[20ch]">
-            <span className="font-serif italic text-sm text-sand opacity-60">Accent §03</span>
-            <h3 className="font-serif text-4xl mt-4 font-medium leading-tight">Muted tones of Mediterranean Olive.</h3>
+            <span className="font-serif italic text-sm text-sand opacity-80">Accent §03</span>
+            <h3 className="font-serif text-4xl mt-4 font-medium leading-tight text-white">Muted tones of Mediterranean Olive.</h3>
           </div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-black/10 rounded-full blur-[80px] -mr-32 -mt-32" />
-          <span className="relative z-10 text-[10px] uppercase tracking-widest font-bold opacity-60">Color: Olive</span>
+          <span className="relative z-10 text-[10px] uppercase tracking-widest font-bold opacity-80 text-white">Color: Olive</span>
         </div>
       </div>
     </section>
@@ -106,18 +129,29 @@ function CategoryCard({ category }: { category: typeof categories[0] }) {
     <Link 
       href={`/blog?category=${category.slug}`}
       className={cn(
-        "relative rounded-[24px] p-8 lg:p-10 flex flex-col justify-end overflow-hidden group transition-all duration-500 hover:-translate-y-1.5 shadow-sm",
+        "relative rounded-[24px] p-8 lg:p-10 flex flex-col justify-end overflow-hidden group transition-all duration-500 hover:-translate-y-1.5 shadow-sm min-h-[320px]",
         category.className
       )}
     >
-      <div 
-        className="absolute inset-0 opacity-100 group-hover:scale-110 transition-transform duration-700 ease-out" 
-        style={{ backgroundImage: category.bgPattern }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+      {category.image ? (
+        <>
+          <Image
+            src={category.image}
+            alt={category.name}
+            fill
+            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+        </>
+      ) : (
+        <div 
+          className="absolute inset-0 opacity-100 group-hover:scale-110 transition-transform duration-700 ease-out" 
+          style={{ backgroundImage: category.bgPattern }}
+        />
+      )}
       
       <div className="relative z-10">
-        <span className="font-serif italic text-sm text-sand/80 block mb-2">{category.count} Stories</span>
+        <span className="font-serif italic text-sm text-sand/90 block mb-2">{category.count} Stories</span>
         <h3 className="font-serif text-3xl lg:text-4xl font-medium tracking-tight text-white">{category.name}</h3>
       </div>
       
