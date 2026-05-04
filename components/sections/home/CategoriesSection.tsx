@@ -72,6 +72,7 @@ export function CategoriesSection() {
             src={accentTiles[0].image!}
             alt={accentTiles[0].name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 300px"
             className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
@@ -91,6 +92,7 @@ export function CategoriesSection() {
             src={accentTiles[1].image!}
             alt={accentTiles[1].name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 300px"
             className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
@@ -110,6 +112,7 @@ export function CategoriesSection() {
             src={accentTiles[2].image!}
             alt={accentTiles[2].name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 600px"
             className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
@@ -139,6 +142,7 @@ function CategoryCard({ category }: { category: typeof categories[0] }) {
             src={category.image}
             alt={category.name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
             className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />

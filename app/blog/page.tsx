@@ -147,7 +147,13 @@ export default async function BlogListingPage({
                   <Link key={post.slug} href={`/blog/${post.slug}`} className="group grid grid-cols-[64px_1fr] gap-3.5 items-center">
                     <div className="aspect-square rounded-[10px] overflow-hidden bg-gradient-to-br from-accent to-accent-deep relative">
                       {post.coverImage && (
-                        <Image src={post.coverImage} alt={post.title} fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                        <Image 
+                          src={post.coverImage} 
+                          alt={post.title} 
+                          fill 
+                          sizes="64px"
+                          className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" 
+                        />
                       )}
                     </div>
                     <div>

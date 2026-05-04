@@ -9,12 +9,13 @@ export function PostCard({ post }: { post: Post }) {
   return (
     <article className="group flex flex-col gap-4.5 cursor-pointer">
       <div className="relative aspect-[5/4] rounded-[20px] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:-translate-y-1 shadow-sm">
-        <Link href={`/blog/${post.slug}`} className="block w-full h-full">
+        <Link href={`/blog/${post.slug}`} className="relative block w-full h-full">
           {post.coverImage ? (
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           ) : (
