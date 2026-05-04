@@ -1,10 +1,21 @@
 # DevKit Blog Starter
 
-A production-ready, MDX-powered blog built with Next.js 14, Tailwind CSS, and shadcn/ui. Fully featured with SEO, dark mode, RSS, search, multi-author support, and more — deploy to Vercel in one click.
+A production-ready, MDX-powered blog built with Next.js 15, Tailwind CSS, and shadcn/ui. Fully featured with SEO, dark mode, RSS, search, multi-author support, and more — deploy to Vercel in one click.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/devkit-market/devkit-blog-starter)
+[![GitHub Stars](https://img.shields.io/github/stars/niks-nikhil-anand/nextjs-blog-kit-Devkit?style=for-the-badge&logo=github&color=gold)](https://github.com/niks-nikhil-anand/nextjs-blog-kit-Devkit/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/niks-nikhil-anand/nextjs-blog-kit-Devkit?style=for-the-badge&color=blue)](https://github.com/niks-nikhil-anand/nextjs-blog-kit-Devkit/commits/main)
+[![License](https://img.shields.io/github/license/niks-nikhil-anand/nextjs-blog-kit-Devkit?style=for-the-badge&color=green)](https://github.com/niks-nikhil-anand/nextjs-blog-kit-Devkit/blob/main/LICENSE)
 
-[Live Demo](https://devkit-blog-starter.vercel.app) · [Report Bug](https://github.com/devkit-market/devkit-blog-starter/issues) · [Request Feature](https://github.com/devkit-market/devkit-blog-starter/issues)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/niks-nikhil-anand/nextjs-blog-kit-Devkit)
+
+<p align="center">
+  <a href="https://nextjs-blog-kit.vercel.app/">
+    <img src="public/hero-screenshot.png" alt="DevKit Blog Hero" width="100%" />
+  </a>
+</p>
+
+[Live Demo](https://nextjs-blog-kit.vercel.app/) · [Report Bug](https://github.com/niks-nikhil-anand/nextjs-blog-kit-Devkit/issues) · [Request Feature](https://github.com/niks-nikhil-anand/nextjs-blog-kit-Devkit/issues) · [Product Page](https://devkitmarket.com/products/nextjs-blog-kit)
+
 
 ---
 
@@ -77,7 +88,7 @@ Most blog templates give you the basics and leave the rest to you. DevKit Blog S
 
 | Layer         | Technology                        |
 | ------------- | --------------------------------- |
-| Framework     | Next.js 14 (App Router)           |
+| Framework     | Next.js 15 (App Router)           |
 | Language      | TypeScript                        |
 | Styling       | Tailwind CSS + shadcn/ui          |
 | Content       | MDX (via next-mdx-remote)         |
@@ -102,7 +113,7 @@ Most blog templates give you the basics and leave the rest to you. DevKit Blog S
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/devkit-market/devkit-blog-starter.git
+git clone https://github.com/niks-nikhil-anand/nextjs-blog-kit-Devkit.git
 cd devkit-blog-starter
 ```
 
@@ -404,4 +415,4 @@ If this starter kit saved you time, consider:
 
 ---
 
-Built with ❤️ by [DevKit Market](https://www.devkitmarket.com)
+Built with ❤️ by [DevKit Market](https://devkitmarket.com)
