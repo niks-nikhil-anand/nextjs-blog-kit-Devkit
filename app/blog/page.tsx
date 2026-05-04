@@ -82,14 +82,6 @@ export default async function BlogListingPage() {
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-3.5 text-[13px] text-muted">
-            <span>Sort by</span>
-            <select className="bg-transparent border border-rule-strong rounded-full px-3.5 py-2 font-sans text-[12px] font-semibold text-ink cursor-pointer outline-none focus:border-accent">
-              <option>Most recent</option>
-              <option>Most read</option>
-              <option>Editor&apos;s pick</option>
-            </select>
-          </div>
         </div>
       </section>
 
